@@ -12,14 +12,14 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@react-three/drei": "^9.58.0",
-    "@react-three/fiber": "^9.3.0",
+    "@react-three/drei": "9.122.0",
+    "@react-three/fiber": "9.3.0",
     "framer-motion": "^12.23.24",
     "gsap": "^3.12.2",
     "lucide-react": "^0.554.0",
     "next": "16.0.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "three": "^0.164.0",
     "three-stdlib": "^2.29.0"
   },
