@@ -18,7 +18,7 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "three": "^0.164.0",
-    "three-stdlib": "^1.8.5",
+    "three-stdlib": "^2.29.0",
     "gsap": "^3.12.2",
     "@react-three/fiber": "^9.0.0",
     "@react-three/drei": "^9.58.0"
