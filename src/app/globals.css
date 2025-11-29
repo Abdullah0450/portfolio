@@ -1,0 +1,331 @@
+@import "tailwindcss";
+@import "./styles/minimal.css";
+
+:root {
+  --color-navy: #0a192f;
+  --color-lightNavy: #0f2133;
+  --color-green: #64ffda;
+  --color-slate: #8892b0;
+  --color-lightSlate: #a8b2d1;
+  --color-white: #e6f1ff;
+  --glass: rgba(255,255,255,0.04);
+}
+
+/* Smooth scrolling */
+html { scroll-behavior: smooth; width: 100%; height: 100%; margin: 0; padding: 0; }
+
+/* Base */
+body {
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(100,255,218,0.06), transparent 6%),
+              radial-gradient(1000px 500px at 90% 90%, rgba(100,255,218,0.03), transparent 6%),
+              linear-gradient(180deg, var(--color-navy) 0%, #041126 100%);
+  color: var(--color-slate);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Simple semantic utility tokens used in JS/TSX */
+.text-green { color: var(--color-green); }
+.bg-green { background-color: var(--color-green); }
+.bg-lightNavy { background-color: var(--color-lightNavy); }
+.text-slate { color: var(--color-slate); }
+.text-lightSlate { color: var(--color-lightSlate); }
+.bg-navy { background-color: var(--color-navy); }
+.border-green { border-color: var(--color-green); }
+
+/* Floating 3D orbs/background shapes */
+.floating-orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.floating-orbs .orb {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.15;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+.orb.one { left: -10%; top: -10%; background: radial-gradient(circle at 30% 30%, rgba(100,255,218,0.16), transparent 40%); animation: float 12s ease-in-out infinite; }
+.orb.two { right: -8%; bottom: -6%; width: 520px; height: 520px; background: radial-gradient(circle at 70% 70%, rgba(150,200,255,0.08), transparent 40%); animation: float 18s ease-in-out infinite; }
+.orb.three { left: 50%; top: 60%; width: 260px; height: 260px; background: radial-gradient(circle at 40% 60%, rgba(255,120,180,0.04), transparent 40%); animation: float 22s ease-in-out infinite; }
+
+@keyframes float {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(20px,-30px,0) scale(1.03); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+
+/* 3D Scene helpers */
+.hero-scene { perspective: 1200px; perspective-origin: 50% 40%; }
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform; /* hint for better perf */
+  transition: box-shadow 250ms ease, transform 350ms cubic-bezier(.2,.9,.2,1);
+  display: flex; /* ensure card can stretch to parent height */
+  height: 100%;
+}
+.tilt-card .tilt-inner { transform-style: preserve-3d; flex: 1 1 auto; display: flex; flex-direction: column; height: 100%; }
+.tilt-card .tilt-glare {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: 0; transition: opacity 250ms ease;
+}
+.tilt-card:hover { box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+
+/* Slightly stronger card styles for projects */
+.project-card-3d {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
+}
+
+/* Left vertical line for tilt cards - subtle by default, lights up when in view */
+.tilt-card { position: relative; }
+.tilt-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 4px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02));
+  border-radius: 4px;
+  transition: background 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+  transform-origin: center;
+  box-shadow: none;
+}
+.tilt-card.in-view::before {
+  background: linear-gradient(180deg, rgba(100,255,218,0.95), rgba(236,72,153,0.9));
+  box-shadow: 0 0 18px rgba(100,255,218,0.18), 0 0 30px rgba(236,72,153,0.12);
+  transform: scaleY(1.02);
+}
+
+/* Animation for the Infinite Slider */
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+.animate-slide { animation: slide 30s linear infinite; }
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-slide { animation: none; }
+  .orb { animation: none; }
+  .tilt-card { transition: none; }
+}
+
+/* Site-wide subtle effects */
+/* Custom cursor (replace pointer on interactive elements) */
+html, body { cursor: auto; }
+.custom-cursor { position: fixed; pointer-events: none; z-index: 9999; width: 22px; height: 22px; border-radius: 9999px; border: 2px solid var(--color-green); transform: translate(-50%, -50%); mix-blend-mode: screen; transition: transform 120ms ease, width 120ms ease, height 120ms ease, opacity 160ms ease; opacity: 0.9 }
+.cursor-hover { width: 40px; height: 40px; opacity: 0.95 }
+
+/* Intro overlay (3D starter bot) */
+@keyframes introFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+}
+
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse 80% 80% at 50% 40%, rgba(2, 6, 23, 0.4), rgba(2, 6, 23, 0.95));
+  animation: introFadeIn 0.6s ease-out;
+}
+
+.intro-card {
+  width: min(980px, 94%);
+  height: min(680px, 88%);
+  background: linear-gradient(135deg, rgba(100, 255, 218, 0.04) 0%, rgba(100, 255, 218, 0.01) 50%, rgba(0, 0, 0, 0.1) 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(100, 255, 218, 0.15);
+  box-shadow: 0 0 20px rgba(100, 255, 218, 0.3), 0 20px 60px rgba(2, 6, 23, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  display: flex;
+  animation: cardSlideIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(12px);
+  position: relative;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(100, 255, 218, 0.05), transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.intro-content {
+  width: 50%;
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+  animation: contentFadeIn 0.8s ease-out 0.2s both;
+}
+
+.intro-canvas {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  background: radial-gradient(ellipse at 60% 50%, rgba(100, 255, 218, 0.08), transparent 70%);
+}
+
+.intro-title {
+  color: var(--color-white);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ffffff 0%, #94f9d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.intro-desc {
+  color: var(--color-slate);
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.intro-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.btn-primary {
+  background: transparent;
+  border: 1.5px solid var(--color-green);
+  color: var(--color-green);
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-green);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.btn-primary:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-primary:hover {
+  color: #062028;
+  box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--color-green) 0%, #94f9d4 100%);
+  color: #062028;
+  padding: 12px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+  position: relative;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(100, 255, 218, 0.5);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .intro-card {
+    flex-direction: column;
+    height: 80vh;
+    width: min(95%, 100%);
+  }
+  .intro-canvas {
+    width: 100%;
+    height: 45%;
+  }
+  .intro-content {
+    width: 100%;
+    padding: 28px 24px;
+    gap: 18px;
+  }
+  .intro-title {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .intro-desc {
+    font-size: 0.95rem;
+  }
+  .intro-actions {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn-primary,
+  .btn-secondary {
+    flex: 1;
+    min-width: 120px;
+  }
+}

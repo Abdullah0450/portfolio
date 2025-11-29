@@ -1,0 +1,77 @@
+/* Minimal 3D Portfolio CSS - Essential styles only */
+
+:root {
+  --accentColor: #c2a4ff;
+  --accentColorLight: #d4b8ff;
+  --accentColorDark: #9d7fd8;
+  --pink: #fb8dff;
+  --backgroundColor: #0b080c;
+}
+
+/* 3D Canvas - Behind all content */
+.global-scene-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Smooth scroll animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Scroll-triggered fade and slide animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-fade-in {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Button hover effects */
+button, .button, a.button {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+button:hover, .button:hover, a.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(198, 124, 247, 0.2);
+}
+
+/* Accent color utility */
+.accent {
+  color: var(--accentColor);
+}
+
+.accent-bg {
+  background-color: var(--accentColor);
+}
+
+/* Simple loading animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  animation: spin 1.5s linear infinite;
+}
