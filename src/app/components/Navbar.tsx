@@ -74,12 +74,12 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="https://www.fiverr.com/sellers/abdullahmali537/"
+            href="https://www.linkedin.com/in/abdullah-m-4a3b38296/"
             target="_blank"
             rel="noopener noreferrer"
             className="block px-4 py-2 bg-green/10 text-green border border-green rounded hover:bg-green/20 transition font-mono text-sm text-center"
           >
-            Hire Me on Fiverr
+            Hire Me
           </a>
         </motion.div>
       )}
