@@ -4,7 +4,7 @@ A modern, interactive portfolio built with **Next.js**, **React Three Fiber**, a
 
 ## 🚀 Live Demo
 
-Visit the site at: [Your deployment URL]
+Visit the site at: (https://portfolio-abd-lnk.vercel.app/)
 
 ## ✨ Features
 
@@ -217,10 +217,10 @@ MIT — Feel free to use this template for your own portfolio.
 
 Built by **Abdullah Malik** — Web Developer specializing in React, Next.js, and modern web technologies.
 
-- **Website:** [Your portfolio URL]
-- **LinkedIn:** [Your LinkedIn]
-- **GitHub:** [Your GitHub]
-- **Email:** maliktriples123789@gmail.com
+- **Website:** https://portfolio-abd-lnk.vercel.app/
+- **LinkedIn:** www.linkedin.com/in/abdullah-malik-4a3b38296
+- **GitHub:** https://github.com/Abdullah0450
+- **Email:** malik.abdullah.232004@gmail.com
 
 ---
 
