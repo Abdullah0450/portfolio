@@ -155,6 +155,7 @@ const SocialLinks = () => (
     transition={{ duration: 0.5, delay: 0.8 }} // Appears after the Hero text
     className="hidden lg:flex fixed left-10 bottom-0 flex-col gap-6 items-center text-lightSlate after:content-[''] after:w-[1px] after:h-24 after:bg-lightSlate after:block"
   >
+    <a href="https://github.com/Abdullah0450" target="_blank" rel="noopener noreferrer" title="GitHub Profile" className="text-lightSlate hover:text-green hover:-translate-y-1 transition"><Github size={20} /></a>
     <a href="https://www.fiverr.com/sellers/abdullahmali537/" target="_blank" rel="noopener noreferrer" title="Fiverr Profile" className="text-lightSlate hover:text-green hover:-translate-y-1 transition"><Code size={20} /></a>
     <a href="https://www.linkedin.com/in/abdullah-m-4a3b38296/" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile" className="text-lightSlate hover:text-green hover:-translate-y-1 transition"><Linkedin size={20} /></a>
     <a href="https://www.instagram.com/abdullah_malik_oo5/" target="_blank" rel="noopener noreferrer" title="Instagram Profile" className="text-lightSlate hover:text-green hover:-translate-y-1 transition"><Instagram size={20} /></a>

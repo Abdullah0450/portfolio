@@ -1,12 +1,12 @@
 'use client';
-
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+          <a
+            href="https://www.upwork.com/freelancers/~018465f55a98ea0651"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block px-4 py-2 bg-green/10 text-green border border-green rounded hover:bg-green/20 transition font-mono text-sm text-center"
+          >
+            Hire Me on Upwork
+          </a>
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -37,7 +37,7 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="https://www.fiverr.com/sellers/abdullahmali537/"
+            href="https://www.upwork.com/freelancers/~018465f55a98ea0651"
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 py-2 bg-green/10 text-green border border-green rounded hover:bg-green/20 transition font-mono text-sm"
@@ -74,12 +74,20 @@ export default function Navbar() {
             </Link>
           ))}
           <a
+<<<<<<< HEAD
             href="https://www.linkedin.com/in/abdullah-m-4a3b38296/"
+=======
+            href="https://www.upwork.com/freelancers/~018465f55a98ea0651"
+>>>>>>> 1802400 (feat: add GitHub to social links and point navbar Hire Me to Upwork)
             target="_blank"
             rel="noopener noreferrer"
             className="block px-4 py-2 bg-green/10 text-green border border-green rounded hover:bg-green/20 transition font-mono text-sm text-center"
           >
+<<<<<<< HEAD
             Hire Me
+=======
+            Hire Me on Upwork
+>>>>>>> 1802400 (feat: add GitHub to social links and point navbar Hire Me to Upwork)
           </a>
         </motion.div>
       )}
