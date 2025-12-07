@@ -83,7 +83,7 @@ export default function ContactPage() {
       {mounted && (
         <>
           {/* Contact form section */}
-          <div className="relative z-20 flex items-center justify-center min-h-[70vh] px-6 pt-20">
+          <div className="relative z-20 flex items-center justify-center min-h-screen md:min-h-[70vh] px-4 sm:px-6 pt-24 md:pt-20 pb-12">
         <motion.div
           ref={formRef}
           className="max-w-2xl w-full"
@@ -91,64 +91,64 @@ export default function ContactPage() {
           initial="hidden"
           animate="visible"
         >
-          <div className="bg-gradient-to-br from-navy/80 to-lightNavy/60 backdrop-blur-xl border border-green/30 rounded-2xl p-8 md:p-12 shadow-2xl">
+          <div className="bg-gradient-to-br from-navy/80 to-lightNavy/60 backdrop-blur-xl border border-green/30 rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-12 shadow-2xl">
             {/* Header */}
-            <motion.div variants={fieldVariants} className="mb-8 text-center">
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-green/20 rounded-full mb-4">
-                <Mail className="w-7 h-7 text-green" />
+            <motion.div variants={fieldVariants} className="mb-6 sm:mb-8 text-center">
+              <div className="inline-flex items-center justify-center w-12 sm:w-14 h-12 sm:h-14 bg-green/20 rounded-full mb-3 sm:mb-4">
+                <Mail className="w-6 sm:w-7 h-6 sm:h-7 text-green" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-black text-white mb-2">Let's Connect</h1>
-              <p className="text-lg text-slate">Send me a message and I'll respond within 24 hours.</p>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-2">Let's Connect</h1>
+              <p className="text-base sm:text-lg text-slate">Send me a message and I'll respond within 24 hours.</p>
             </motion.div>
 
             {/* Form */}
-            <form onSubmit={onSubmit} className="space-y-5">
+            <form onSubmit={onSubmit} className="space-y-4 sm:space-y-5">
               {/* Name & Email Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                 <motion.div variants={fieldVariants}>
-                  <label className="block text-sm font-semibold text-lightSlate mb-2">Your Name</label>
+                  <label className="block text-xs sm:text-sm font-semibold text-lightSlate mb-2">Your Name</label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="John Doe"
-                    className="w-full px-4 py-3 bg-navy/60 border border-white/10 focus:border-green/50 rounded-lg text-white placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-green/20 transition"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-navy/60 border border-white/10 focus:border-green/50 rounded-lg text-white placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-green/20 transition text-sm sm:text-base"
                   />
                 </motion.div>
 
                 <motion.div variants={fieldVariants}>
-                  <label className="block text-sm font-semibold text-lightSlate mb-2">Your Email</label>
+                  <label className="block text-xs sm:text-sm font-semibold text-lightSlate mb-2">Your Email</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="john@example.com"
-                    className="w-full px-4 py-3 bg-navy/60 border border-white/10 focus:border-green/50 rounded-lg text-white placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-green/20 transition"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-navy/60 border border-white/10 focus:border-green/50 rounded-lg text-white placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-green/20 transition text-sm sm:text-base"
                   />
                 </motion.div>
               </div>
 
               {/* Subject */}
               <motion.div variants={fieldVariants}>
-                <label className="block text-sm font-semibold text-lightSlate mb-2">Subject (Optional)</label>
+                <label className="block text-xs sm:text-sm font-semibold text-lightSlate mb-2">Subject (Optional)</label>
                 <input
                   type="text"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   placeholder="Project inquiry, collaboration, etc."
-                  className="w-full px-4 py-3 bg-navy/60 border border-white/10 focus:border-green/50 rounded-lg text-white placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-green/20 transition"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-navy/60 border border-white/10 focus:border-green/50 rounded-lg text-white placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-green/20 transition text-sm sm:text-base"
                 />
               </motion.div>
 
               {/* Message */}
               <motion.div variants={fieldVariants}>
-                <label className="block text-sm font-semibold text-lightSlate mb-2">Your Message</label>
+                <label className="block text-xs sm:text-sm font-semibold text-lightSlate mb-2">Your Message</label>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Tell me about your project, idea, or question..."
                   rows={6}
-                  className="w-full px-4 py-3 bg-navy/60 border border-white/10 focus:border-green/50 rounded-lg text-white placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-green/20 transition resize-none"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-navy/60 border border-white/10 focus:border-green/50 rounded-lg text-white placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-green/20 transition resize-none text-sm sm:text-base"
                 />
               </motion.div>
 
@@ -157,23 +157,23 @@ export default function ContactPage() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg ${
+                  className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-sm sm:text-base ${
                     status.ok
                       ? 'bg-green/10 border border-green/50 text-green'
                       : 'bg-red-500/10 border border-red-500/50 text-red-400'
                   }`}
                 >
-                  {status.ok ? <Check size={20} /> : <AlertCircle size={20} />}
-                  <span className="text-sm font-medium">{status.message}</span>
+                  {status.ok ? <Check size={18} className="sm:w-5 sm:h-5" /> : <AlertCircle size={18} className="sm:w-5 sm:h-5" />}
+                  <span className="font-medium">{status.message}</span>
                 </motion.div>
               )}
 
               {/* Submit Button */}
-              <motion.div variants={fieldVariants} className="flex gap-4 pt-4">
+              <motion.div variants={fieldVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
                 <button
                   type="submit"
                   disabled={sending}
-                  className="flex-1 px-6 py-3 bg-gradient-to-r from-green to-green/80 text-navy font-bold rounded-lg hover:shadow-lg hover:shadow-green/30 disabled:opacity-60 transition transform hover:scale-105 active:scale-95"
+                  className="flex-1 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-green to-green/80 text-navy font-bold rounded-lg hover:shadow-lg hover:shadow-green/30 disabled:opacity-60 transition transform hover:scale-105 active:scale-95 text-sm sm:text-base"
                 >
                   {sending ? (
                     <span className="flex items-center justify-center gap-2">
@@ -184,16 +184,18 @@ export default function ContactPage() {
                     'Send Message'
                   )}
                 </button>
-                <AnimatedButton href="/" variant="outline">
-                  Back Home
-                </AnimatedButton>
+                <div className="flex-1">
+                  <AnimatedButton href="/" variant="outline">
+                    Back Home
+                  </AnimatedButton>
+                </div>
               </motion.div>
             </form>
 
             {/* FAQ Quick Links */}
-            <motion.div variants={fieldVariants} className="mt-8 pt-8 border-t border-white/10">
-              <p className="text-sm text-lightSlate mb-4 font-semibold">Quick answers:</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <motion.div variants={fieldVariants} className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/10">
+              <p className="text-xs sm:text-sm text-lightSlate mb-3 sm:mb-4 font-semibold">Quick answers:</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <a href="#" className="text-xs text-slate hover:text-green transition">
                   → Response time: 24–48 hours
                 </a>
@@ -207,11 +209,11 @@ export default function ContactPage() {
       </div>
 
       {/* Testimonials Sliding Section */}
-      <div className="relative z-20 w-full py-20 px-6 bg-gradient-to-t from-navy/95 to-transparent">
+      <div className="relative z-20 w-full py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-t from-navy/95 to-transparent">
         <Testimonials />
       </div>
       {/* FAQ Section (animated) */}
-      <div className="relative z-20 w-full bg-transparent">
+      <div className="relative z-20 w-full bg-transparent px-4 sm:px-6 pb-10">
         <FAQ />
       </div>
         </>
