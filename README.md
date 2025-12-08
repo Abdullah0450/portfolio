@@ -11,7 +11,7 @@ Visit the site at: (https://portfolio-abd-lnk.vercel.app/)
 - **Interactive 3D Hero Section** — Eye-tracking head and particle system animations
 - **Responsive Design** — Mobile-first, works on all devices
 - **Project Showcase** — Tilt cards with 3D effects
-- **Professional Contact Form** — Integrated with SendGrid for email delivery
+- **Professional Contact Form** — Integrated with FormSubmit for easy email delivery
 - **Testimonials Section** — Client feedback with professional styling
 - **Skills Timeline** — Animated skill proficiency bars
 - **Dark Theme** — Eye-friendly dark mode with accent colors (teal & pink)
@@ -22,7 +22,7 @@ Visit the site at: (https://portfolio-abd-lnk.vercel.app/)
 - **Frontend:** Next.js 16, React 19, TypeScript
 - **3D Graphics:** Three.js, @react-three/fiber, @react-three/drei
 - **Styling:** Tailwind CSS 4, Framer Motion
-- **Email Service:** SendGrid API (optional; uses mailto fallback)
+- **Email Service:** FormSubmit (zero configuration needed)
 - **Hosting:** Ready for Vercel, Netlify, or any static host
 
 ## 📦 Installation
@@ -38,32 +38,17 @@ Visit the site at: (https://portfolio-abd-lnk.vercel.app/)
    npm install
    ```
 
-3. **Set up environment variables:**
-   - Copy `.env.example` to `.env.local`
-   - Add your SendGrid API key (optional)
-   ```bash
-   cp .env.example .env.local
-   ```
-
-4. **Run locally:**
+3. **Run the development server:**
    ```bash
    npm run dev
    ```
    Visit `http://localhost:3000`
 
-## 📧 Email Setup (Optional)
+## 📧 Contact Form Setup
 
-### SendGrid
-1. Sign up at [sendgrid.com](https://sendgrid.com)
-2. Create an API key from the dashboard
-3. Add to `.env.local`:
-   ```env
-   SENDGRID_API_KEY=your_key_here
-   CONTACT_TO=your_email@example.com
-   ```
+The contact form uses **FormSubmit.co** — no configuration needed!
 
-### Without Email
-If no `SENDGRID_API_KEY` is set, the contact form will show a helpful message. Users can still reach you via the fallback mailto link.
+When you first deploy, FormSubmit will send a confirmation email to the recipient email address. Click the confirmation link to activate form submissions.
 
 ## 🏗 Build & Deploy
 
@@ -83,9 +68,7 @@ npm install -g vercel
 vercel
 ```
 
-Then set environment variables in Vercel dashboard:
-- `SENDGRID_API_KEY` — Your SendGrid API key
-- `CONTACT_TO` — Email address to receive contact form submissions
+No environment variables needed — FormSubmit handles everything automatically!
 
 ### Deploy to Netlify
 1. Connect your GitHub repo to Netlify
@@ -94,7 +77,7 @@ Then set environment variables in Vercel dashboard:
 4. Add environment variables in Netlify dashboard
 
 ### Static Hosting (GitHub Pages, etc.)
-This site uses Next.js with static prerendering. Most features work on static hosts, but the `/api/contact` endpoint requires a serverless function provider (Vercel Functions, Netlify Functions, etc.).
+This site uses Next.js with static prerendering. The contact form uses FormSubmit, which works on any hosting provider.
 
 ## 🎨 Customization
 
@@ -149,21 +132,19 @@ my-portfolio/
 │   ├── page.tsx                    # Homepage
 │   ├── layout.tsx                  # Root layout
 │   ├── globals.css                 # Global styles
-│   ├── api/contact/route.ts        # Email API endpoint
 │   ├── contact/page.tsx            # Contact page
-│   ├── components/
-│   │   ├── Canvas3D.tsx            # Main 3D scene
-│   │   ├── ContactCanvas.tsx       # Contact page 3D
-│   │   ├── Testimonials.tsx        # Testimonials section
-│   │   ├── AnimatedButton.tsx      # Reusable button
-│   │   ├── TiltCard.tsx            # 3D tilt effect card
-│   │   ├── Navbar.tsx              # Navigation
-│   │   └── ...
+│   └── components/
+│       ├── Canvas3D.tsx            # Main 3D scene
+│       ├── ContactCanvas.tsx       # Contact page 3D
+│       ├── Testimonials.tsx        # Testimonials section
+│       ├── AnimatedButton.tsx      # Reusable button
+│       ├── TiltCard.tsx            # 3D tilt effect card
+│       ├── Navbar.tsx              # Navigation
+│       └── ...
 │   └── styles/
 │       └── minimal.css             # Additional styles
 ├── public/
 │   └── models/                     # 3D assets
-├── .env.example                    # Environment variables template
 ├── package.json
 ├── tsconfig.json
 ├── next.config.ts                  # Next.js configuration
@@ -190,11 +171,11 @@ npm run build
 - Check browser console for Three.js errors
 - Test in a different browser
 
-### Email not sending
-- Verify `SENDGRID_API_KEY` is set in `.env.local`
-- Check SendGrid dashboard for API restrictions
-- Verify `CONTACT_TO` email address is correct
-- Check browser console network tab for API errors
+### Contact form not working
+- Check your email for FormSubmit confirmation email
+- Click the confirmation link to activate submissions
+- Verify the recipient email is correct in the form code
+- Check browser console for network errors
 
 ## 📊 Performance
 
