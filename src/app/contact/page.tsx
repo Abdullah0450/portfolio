@@ -42,15 +42,16 @@ export default function ContactPage() {
       formData.append('email', email);
       formData.append('subject', subject || 'Website Contact');
       formData.append('message', message);
-      formData.append('_captcha', 'false'); // Disable reCAPTCHA for simplicity
-      formData.append('_next', window.location.origin + '/contact?success=true'); // Redirect on success
+      formData.append('_captcha', 'false');
+      formData.append('_next', window.location.origin + '/contact?success=true');
 
       const res = await fetch('https://formsubmit.co/maliksss123789@gmail.com', {
         method: 'POST',
         body: formData,
       });
 
-      if (res.ok) {
+      // FormSubmit redirects on success, so we check status code instead of parsing JSON
+      if (res.ok || res.status === 200) {
         setStatus({ ok: true, message: '✅ Message sent successfully! I will get back to you soon.' });
         setName('');
         setEmail('');
@@ -61,7 +62,7 @@ export default function ContactPage() {
         setStatus({ ok: false, message: 'Failed to send. Try again.' });
       }
     } catch (err: any) {
-      setStatus({ ok: false, message: String(err?.message || err) });
+      setStatus({ ok: false, message: String(err?.message || 'Network error. Please try again.') });
     } finally {
       setSending(false);
     }
