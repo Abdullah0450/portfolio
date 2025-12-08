@@ -45,7 +45,7 @@ export default function ContactPage() {
       formData.append('_captcha', 'false'); // Disable reCAPTCHA for simplicity
       formData.append('_next', window.location.origin + '/contact?success=true'); // Redirect on success
 
-      const res = await fetch('https://formsubmit.co/maliktriples123789@gmail.com', {
+      const res = await fetch('https://formsubmit.co/maliksss123789@gmail.com', {
         method: 'POST',
         body: formData,
       });
