@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, MessageCircle } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,6 +44,16 @@ export default function Navbar() {
           >
             Hire Me
           </a>
+          <a
+            href="https://wa.me/923495538902"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="WhatsApp"
+            className="px-4 py-2 bg-green/10 text-green border border-green rounded hover:bg-green/20 transition font-mono text-sm flex items-center gap-2"
+          >
+            <MessageCircle size={16} />
+            WhatsApp
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -80,6 +90,15 @@ export default function Navbar() {
             className="block px-4 py-2 bg-green/10 text-green border border-green rounded hover:bg-green/20 transition font-mono text-sm text-center"
           >
             Hire Me on Upwork
+          </a>
+          <a
+            href="https://wa.me/923495538902"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block px-4 py-2 bg-green/10 text-green border border-green rounded hover:bg-green/20 transition font-mono text-sm text-center flex items-center justify-center gap-2"
+          >
+            <MessageCircle size={16} />
+            WhatsApp
           </a>
         </motion.div>
       )}
