@@ -37,13 +37,20 @@ export default function ContactPage() {
     setSending(true);
     setStatus(null);
     try {
-      const res = await fetch('/api/contact', {
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('subject', subject || 'Website Contact');
+      formData.append('message', message);
+      formData.append('_captcha', 'false'); // Disable reCAPTCHA for simplicity
+      formData.append('_next', window.location.origin + '/contact?success=true'); // Redirect on success
+
+      const res = await fetch('https://formsubmit.co/maliktriples123789@gmail.com', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject: subject || 'Website Contact', message }),
+        body: formData,
       });
-      const data = await res.json();
-      if (data.ok) {
+
+      if (res.ok) {
         setStatus({ ok: true, message: '✅ Message sent successfully! I will get back to you soon.' });
         setName('');
         setEmail('');
@@ -51,7 +58,7 @@ export default function ContactPage() {
         setMessage('');
         setTimeout(() => setStatus(null), 5000);
       } else {
-        setStatus({ ok: false, message: data.error || 'Failed to send. Try again.' });
+        setStatus({ ok: false, message: 'Failed to send. Try again.' });
       }
     } catch (err: any) {
       setStatus({ ok: false, message: String(err?.message || err) });
