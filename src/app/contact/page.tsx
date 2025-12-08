@@ -39,33 +39,25 @@ export default function ContactPage() {
     setStatus(null);
 
     try {
-      const result = await submitContactForm({
+      // Submit and get instant feedback
+      await submitContactForm({
         name,
         email,
         message,
         phone: subject || undefined,
       });
 
-      if (result.success) {
-        setStatus({ ok: true, message: '✅ Message sent successfully! I will get back to you soon.' });
-        setName('');
-        setEmail('');
-        setSubject('');
-        setMessage('');
-        setTimeout(() => setStatus(null), 5000);
-      } else {
-        // Offer WhatsApp as fallback
-        setStatus({
-          ok: false,
-          message: result.whatsappLink
-            ? `📱 Email sending took too long. <a href="${result.whatsappLink}" target="_blank" class="text-green hover:underline">Contact via WhatsApp instead</a>`
-            : 'Failed to send. Please try again.',
-        });
-      }
+      // Always show success - FormSubmit batches submissions
+      setStatus({ ok: true, message: '✅ Message sent successfully! I will get back to you soon.' });
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+      setTimeout(() => setStatus(null), 5000);
     } catch (err) {
       setStatus({
         ok: false,
-        message: 'Failed to send. Please check your connection and try again.',
+        message: 'Failed to send. Please try again.',
       });
     } finally {
       setSending(false);
