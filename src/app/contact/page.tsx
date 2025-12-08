@@ -7,6 +7,7 @@ import FAQ from '../components/FAQ';
 import AnimatedButton from '../components/AnimatedButton';
 import { Mail, Check, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { submitContactForm } from '../services/contactService';
 
 export default function ContactPage() {
   const [mounted, setMounted] = useState(false);
@@ -15,7 +16,7 @@ export default function ContactPage() {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
-  const [status, setStatus] = useState<{ ok: boolean; message?: string } | null>(null);
+  const [status, setStatus] = useState<{ ok: boolean; message: string } | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,29 +37,16 @@ export default function ContactPage() {
     }
     setSending(true);
     setStatus(null);
+
     try {
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('subject', subject || 'Website Contact');
-      formData.append('message', message);
-      formData.append('_captcha', 'false');
-      formData.append('_template', 'box'); // Beautiful HTML email template
-      formData.append('_autoresponse', 'Thanks for contacting me! I will get back to you soon.');
-
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-
-      const res = await fetch('https://formsubmit.co/maliksss123789@gmail.com', {
-        method: 'POST',
-        body: formData,
-        signal: controller.signal,
+      const result = await submitContactForm({
+        name,
+        email,
+        message,
+        phone: subject || undefined,
       });
 
-      clearTimeout(timeoutId);
-
-      // FormSubmit returns 200 on success or redirects with 303
-      if (res.ok || res.status === 303) {
+      if (result.success) {
         setStatus({ ok: true, message: '✅ Message sent successfully! I will get back to you soon.' });
         setName('');
         setEmail('');
@@ -66,24 +54,19 @@ export default function ContactPage() {
         setMessage('');
         setTimeout(() => setStatus(null), 5000);
       } else {
-        setStatus({ ok: false, message: 'Failed to send. Please try again.' });
+        // Offer WhatsApp as fallback
+        setStatus({
+          ok: false,
+          message: result.whatsappLink
+            ? `📱 Email sending took too long. <a href="${result.whatsappLink}" target="_blank" class="text-green hover:underline">Contact via WhatsApp instead</a>`
+            : 'Failed to send. Please try again.',
+        });
       }
-    } catch (err: any) {
-      // FormSubmit may throw a CORS error on redirect, but email is already sent
-      // Only treat as success if it's a network/redirect error, not a validation error
-      if (err.name === 'AbortError') {
-        setStatus({ ok: false, message: 'Request timeout. Please check your connection.' });
-      } else if (name && email && message) {
-        // If we have valid form data, assume email was sent despite the error
-        setStatus({ ok: true, message: '✅ Message sent successfully! I will get back to you soon.' });
-        setName('');
-        setEmail('');
-        setSubject('');
-        setMessage('');
-        setTimeout(() => setStatus(null), 5000);
-      } else {
-        setStatus({ ok: false, message: 'Failed to send. Please try again.' });
-      }
+    } catch (err) {
+      setStatus({
+        ok: false,
+        message: 'Failed to send. Please check your connection and try again.',
+      });
     } finally {
       setSending(false);
     }
@@ -192,8 +175,8 @@ export default function ContactPage() {
                       : 'bg-red-500/10 border border-red-500/50 text-red-400'
                   }`}
                 >
-                  {status.ok ? <Check size={18} className="sm:w-5 sm:h-5" /> : <AlertCircle size={18} className="sm:w-5 sm:h-5" />}
-                  <span className="font-medium">{status.message}</span>
+                  {status.ok ? <Check size={18} className="sm:w-5 sm:h-5 flex-shrink-0" /> : <AlertCircle size={18} className="sm:w-5 sm:h-5 flex-shrink-0" />}
+                  <span className="font-medium" dangerouslySetInnerHTML={{ __html: status.message }} />
                 </motion.div>
               )}
 
